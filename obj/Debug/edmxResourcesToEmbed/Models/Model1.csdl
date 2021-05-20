@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Try_MeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Asset">
+    <Key>
+      <PropertyRef Name="Ass_Id" />
+    </Key>
+    <Property Name="Ass_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ass_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cond_Id" Type="Int32" Nullable="false" />
+    <Property Name="Brand_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Brand" Relationship="Self.FK_Assets_Brand" FromRole="Assets" ToRole="Brand" />
+    <NavigationProperty Name="Condition" Relationship="Self.FK_Assets_Condition" FromRole="Assets" ToRole="Condition" />
+  </EntityType>
+  <EntityType Name="Brand">
+    <Key>
+      <PropertyRef Name="Brand_Id" />
+    </Key>
+    <Property Name="Brand_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Bra" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Assets" Relationship="Self.FK_Assets_Brand" FromRole="Brand" ToRole="Assets" />
+  </EntityType>
+  <EntityType Name="Condition">
+    <Key>
+      <PropertyRef Name="Cond_Id" />
+    </Key>
+    <Property Name="Cond_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cond_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Assets" Relationship="Self.FK_Assets_Condition" FromRole="Condition" ToRole="Assets" />
+  </EntityType>
+  <Association Name="FK_Assets_Brand">
+    <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+    <End Role="Assets" Type="Self.Asset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="Brand_Id" />
+      </Principal>
+      <Dependent Role="Assets">
+        <PropertyRef Name="Brand_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Assets_Condition">
+    <End Role="Condition" Type="Self.Condition" Multiplicity="1" />
+    <End Role="Assets" Type="Self.Asset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Condition">
+        <PropertyRef Name="Cond_Id" />
+      </Principal>
+      <Dependent Role="Assets">
+        <PropertyRef Name="Cond_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Try_MeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Assets" EntityType="Self.Asset" />
+    <EntitySet Name="Brands" EntityType="Self.Brand" />
+    <EntitySet Name="Conditions" EntityType="Self.Condition" />
+    <AssociationSet Name="FK_Assets_Brand" Association="Self.FK_Assets_Brand">
+      <End Role="Brand" EntitySet="Brands" />
+      <End Role="Assets" EntitySet="Assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Assets_Condition" Association="Self.FK_Assets_Condition">
+      <End Role="Condition" EntitySet="Conditions" />
+      <End Role="Assets" EntitySet="Assets" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

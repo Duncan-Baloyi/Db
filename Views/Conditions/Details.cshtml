@@ -1,0 +1,26 @@
+﻿@model Mpho.Models.Condition
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Condition</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cond_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cond_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Cond_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

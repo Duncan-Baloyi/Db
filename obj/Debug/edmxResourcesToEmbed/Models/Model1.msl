@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Try_MeModelStoreContainer" CdmEntityContainer="Try_MeEntities">
+    <EntitySetMapping Name="Assets">
+      <EntityTypeMapping TypeName="Try_MeModel.Asset">
+        <MappingFragment StoreEntitySet="Assets">
+          <ScalarProperty Name="Ass_Id" ColumnName="Ass_Id" />
+          <ScalarProperty Name="Ass_name" ColumnName="Ass_name" />
+          <ScalarProperty Name="Cond_Id" ColumnName="Cond_Id" />
+          <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Brands">
+      <EntityTypeMapping TypeName="Try_MeModel.Brand">
+        <MappingFragment StoreEntitySet="Brand">
+          <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
+          <ScalarProperty Name="Bra" ColumnName="Bra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Conditions">
+      <EntityTypeMapping TypeName="Try_MeModel.Condition">
+        <MappingFragment StoreEntitySet="Condition">
+          <ScalarProperty Name="Cond_Id" ColumnName="Cond_Id" />
+          <ScalarProperty Name="Cond_name" ColumnName="Cond_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

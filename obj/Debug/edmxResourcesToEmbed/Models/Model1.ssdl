@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Try_MeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Assets">
+    <Key>
+      <PropertyRef Name="Ass_Id" />
+    </Key>
+    <Property Name="Ass_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ass_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cond_Id" Type="int" Nullable="false" />
+    <Property Name="Brand_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Brand">
+    <Key>
+      <PropertyRef Name="Brand_Id" />
+    </Key>
+    <Property Name="Brand_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Bra" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Condition">
+    <Key>
+      <PropertyRef Name="Cond_Id" />
+    </Key>
+    <Property Name="Cond_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cond_name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Assets_Brand">
+    <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+    <End Role="Assets" Type="Self.Assets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="Brand_Id" />
+      </Principal>
+      <Dependent Role="Assets">
+        <PropertyRef Name="Brand_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Assets_Condition">
+    <End Role="Condition" Type="Self.Condition" Multiplicity="1" />
+    <End Role="Assets" Type="Self.Assets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Condition">
+        <PropertyRef Name="Cond_Id" />
+      </Principal>
+      <Dependent Role="Assets">
+        <PropertyRef Name="Cond_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Try_MeModelStoreContainer">
+    <EntitySet Name="Assets" EntityType="Self.Assets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Condition" EntityType="Self.Condition" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Assets_Brand" Association="Self.FK_Assets_Brand">
+      <End Role="Brand" EntitySet="Brand" />
+      <End Role="Assets" EntitySet="Assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Assets_Condition" Association="Self.FK_Assets_Condition">
+      <End Role="Condition" EntitySet="Condition" />
+      <End Role="Assets" EntitySet="Assets" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
